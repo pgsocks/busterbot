@@ -88,5 +88,16 @@ async def demote(ctx: commands.Context):
                 reason = "Community voted demotion")
             await message.channel.send(f"demoted {member.name}")
 
+@bot.command()
+async def avatar(ctx: commands.Context):
+
+    if ctx.message.attachments:
+        attachment = ctx.message.attachments[0]
+        await attachment.save(attachment.filename)
+        with open(attachment.filename, "rb") as f:
+            await ctx.guild.edit(icon = f.read())
+    else:
+        await ctx.send("Attach a server avatar image")
+
 bot.run(sys.argv[1])
 
