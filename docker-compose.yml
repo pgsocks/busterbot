@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+
+  bot:
+    build: .
+    environment:
+      - REDIS_HOST=redis
+      - BUSTERBOT_TOKEN=${BUSTERBOT_TOKEN}
+    depends_on:
+      - redis
+
+  redis:
+    image: redis
+    volumes:
+      - redis:/data
+
+volumes:
+  redis:
